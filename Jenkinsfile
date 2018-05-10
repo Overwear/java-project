@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'ant -f build.xml -v
+                sh 'ant -f build.xml -v'
             }
         }
         stage('Deploy') {
