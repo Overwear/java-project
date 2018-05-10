@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label '31bfaa9835ad'}
     stages {
         stage('Unit Testing') {
             steps {
