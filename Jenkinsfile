@@ -16,8 +16,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                //sh '
+                sh 'aws s3 cp dist/rectangle-${BUILD_NUMBER}.jar s3://hw-10-yee/'
             }
         }
+        stage('Report') {
+            steps {
+                echo 'Generating Report...'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
+                {    
+                    sh 'aws cloudformation describe-stack-resources --region us-east-1 --stack-name jenkins'
+                }
     }
 }
